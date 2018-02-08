@@ -22,6 +22,10 @@
 #include <cstdint>
 #include <memory>
 
+extern "C" {
+    #include "jpeglib.h"
+}
+
 class JpegDecoderMgr;
 class SkSampler;
 class SkStream;
@@ -130,6 +134,16 @@ private:
                             bool needsCMYKToRGB);
     [[nodiscard]] bool allocateStorage(const SkImageInfo& dstInfo);
     int readRows(const SkImageInfo& dstInfo, void* dst, size_t rowBytes, int count, const Options&);
+
+    /*
+     * Categorize JPEG image dimension.
+     * Can be used to apply different settings for different sizes.
+     */
+    enum JpegDecodingSize: JDIMENSION {
+        kSmall_JpegDecodingSize = 400,
+        kMedium_JpegDecodingSize = 1600
+    };
+    static void setupJpegDecoding(jpeg_decompress_struct* dinfo);
 
     /*
      * Scanline decoding.
