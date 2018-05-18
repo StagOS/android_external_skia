@@ -651,7 +651,6 @@ void SkJpegCodec::setupJpegDecoding(jpeg_decompress_struct* dinfo)
     }
 
     dinfo->do_fancy_upsampling = FALSE;
-    dinfo->disable_merged_upsampling = TRUE;
     dinfo->dct_method = JDCT_IFAST;
 }
 
