@@ -1930,6 +1930,10 @@ cc_library_static {
       },
     },
 
+    lto: {
+        thin: true,
+    },
+
     defaults: ["skia_deps",
                "skia_defaults",
     ],
